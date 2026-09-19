@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.security import get_current_user
@@ -7,10 +7,40 @@ from app.schemas.schemas import ActivityCreate, ActivityOut
 from app.services.orchestrator import orchestrator
 from datetime import datetime, timezone
 
+# Import the Stage 7 ML-KEM Engine
+from app.core.pqc_kem import pqc_engine
+
 router = APIRouter(prefix="/api/activities", tags=["Activities"])
 
 @router.post("/log")
 def log_activity(activity_in: ActivityCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    
+    # =====================================================================
+    # STAGE 7: ML-KEM POST-QUANTUM TUNNEL VERIFICATION
+    # (Simulating the frontend-to-backend quantum encryption handshake)
+    # =====================================================================
+    try:
+        # 1. Package the raw data
+        raw_payload = {
+            "action_type": activity_in.action_type,
+            "bytes_transferred": activity_in.bytes_transferred,
+            "is_sensitive_file": activity_in.is_sensitive_file
+        }
+        
+        # 2. Encapsulate (This happens on the frontend in the final build)
+        encrypted_package = pqc_engine.encapsulate_telemetry(raw_payload)
+        
+        # 3. Decapsulate (Backend unwrapping the tunnel)
+        secure_data = pqc_engine.decapsulate_telemetry(encrypted_package)
+        
+        print(f"\n[STAGE 7 ACTIVE] ML-KEM-768 Tunnel Verified.")
+        print(f" -> Encrypted Ciphertext: {encrypted_package['cipher_text'][:30]}...")
+        print(f" -> Decapsulated Data: {secure_data}\n")
+        
+    except Exception as e:
+        print(f"[STAGE 7 ERROR] Cryptographic failure: {e}")
+    # =====================================================================
+
     # 1. Store the exact activity in database
     log_entry = ActivityLog(
         user_id=current_user.id,

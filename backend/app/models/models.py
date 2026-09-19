@@ -69,3 +69,14 @@ class Incident(Base):
     shap_summary = Column(JSON, nullable=False)
     enforced_action = Column(String, nullable=False)
     status = Column(String, default="OPEN")  # OPEN, INVESTIGATING, MITIGATED
+
+class SecureAuditLog(Base):
+    """
+    Stage 8: Cryptographically sealed ledger for all RASRO decisions.
+    """
+    __tablename__ = "secure_audit_logs"
+    id = Column(Integer, primary_key=True, index=True)
+    timestamp = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    event_payload = Column(JSON, nullable=False)
+    cryptographic_hash = Column(String(256), nullable=False)
+    previous_hash = Column(String(256), nullable=False, default="GENESIS_BLOCK")

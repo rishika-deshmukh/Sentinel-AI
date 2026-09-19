@@ -1,10 +1,15 @@
 from sqlalchemy.orm import Session
+from datetime import datetime
+
 from app.ml.generator import SyntheticDataGenerator
 from app.ml.feature_pipeline import FeatureEngineeringPipeline
 from app.ml.models import AnomalyDetectionEngine
 from app.ml.explainer import ModelExplainer
 from app.ml.game_engine import BayesianStackelbergGameEngine
-from app.models.models import ThreatAnalysisRecord, Alert, Incident
+from app.models.models import ThreatAnalysisRecord, Alert, Incident, SecureAuditLog
+
+# Import Stage 8 ML-DSA Engine
+from app.core.pqc_dsa import dsa_engine
 
 class SentinelOrchestrator:
     _instance = None
@@ -83,6 +88,45 @@ class SentinelOrchestrator:
             )
             db.add(incident)
 
+        # =====================================================================
+        # STAGE 8: TAMPER-EVIDENT CRYPTOGRAPHIC AUDIT LOGGING (ML-DSA)
+        # =====================================================================
+        try:
+            # 1. Fetch the previous signature to continue the chain
+            last_log = db.query(SecureAuditLog).order_by(SecureAuditLog.id.desc()).first()
+            previous_signature = last_log.cryptographic_hash if last_log else dsa_engine.genesis_hash
+
+            # 2. Package the exact decision details
+            event_payload = {
+                "user_id": user_id,
+                "risk_score": float(risk_score),
+                "game_action": action,
+                "timestamp": str(datetime.utcnow())
+            }
+
+            # 3. Create the quantum-secure digital signature
+            new_signature = dsa_engine.sign_incident(
+                incident_data=event_payload, 
+                previous_signature=previous_signature
+            )
+
+            # 4. Save the chained seal to the database
+            secure_log = SecureAuditLog(
+                event_payload=event_payload,
+                cryptographic_hash=new_signature,
+                previous_hash=previous_signature
+            )
+            db.add(secure_log)
+            
+            print(f"\n[STAGE 8 ACTIVE] ML-DSA-65 Digital Wax Seal Applied.")
+            print(f" -> Chained to Previous: {previous_signature[:20]}...")
+            print(f" -> New Block Seal: {new_signature[:20]}...\n")
+            
+        except Exception as e:
+            print(f"[STAGE 8 ERROR] Failed to seal ledger: {e}")
+        # =====================================================================
+
+        # Commit everything (Alerts, Incidents, and the Secure Audit Log) at once
         db.commit()
 
         return {
