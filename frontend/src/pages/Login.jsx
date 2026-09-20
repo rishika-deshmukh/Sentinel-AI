@@ -64,7 +64,7 @@ export default function Login({ onLoginSuccess }) {
         </form>
 
         <div className="mt-6 text-xs text-gray-500 text-center">
-          Default users seeded: <span className="text-gray-300 font-mono">admin</span>, <span className="text-gray-300 font-mono">analyst</span>
+          Default users seeded: <span className="text-gray-300 font-mono">admin</span>
         </div>
       </div>
     </div>
