@@ -7,14 +7,6 @@ Unlike traditional anomaly detection systems that rely on fixed behavioral patte
 <!-- 📸 HERO SCREENSHOT PLACEHOLDER -->
 ![SentinelAI Main Dashboard](./images/soc-dashboard.png)
 
-*(Replace this with a wide screenshot of the main Executive SOC Dashboard showing the SHAP chart and key metrics.)*
-
-## 🧰 Tech Stack
-
-🐍 **Python 3.10** &nbsp;&nbsp; ⚡ **FastAPI** &nbsp;&nbsp; ⚛️ **React 18** &nbsp;&nbsp; 🐘 **PostgreSQL**  
-🤖 **Scikit-Learn** &nbsp;&nbsp; 🎨 **Tailwind CSS** &nbsp;&nbsp; 📊 **Recharts**  
-🎮 **RASRO / Stackelberg Game Theory** &nbsp;&nbsp; 🔐 **Post-Quantum Cryptography**  
-🔑 **ML-KEM** &nbsp;&nbsp; ✍️ **ML-DSA** &nbsp;&nbsp; 🔎 **SHAP**
 
 ![Python](https://img.shields.io/badge/Python-3.10-3776AB?style=flat&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
