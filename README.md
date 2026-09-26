@@ -5,7 +5,7 @@ An end-to-end **cybersecurity research framework and data pipeline** designed to
 Unlike traditional anomaly detection systems that rely on fixed behavioral patterns, SentinelAI models how attackers can change their behavior to avoid detection. It combines **Game Theory, Explainable AI (XAI), and Post-Quantum Cryptography (PQC)** to create an adaptive and secure threat detection environment.
 
 <!-- 📸 HERO SCREENSHOT PLACEHOLDER -->
-![SentinelAI Main Dashboard](./images/hero-dashboard.png)
+![SentinelAI Main Dashboard](./images/soc-dashboard.png)
 
 *(Replace this with a wide screenshot of the main Executive SOC Dashboard showing the SHAP chart and key metrics.)*
 
@@ -31,15 +31,11 @@ Unlike traditional anomaly detection systems that rely on fixed behavioral patte
 
 ## 📌 Problem Statement
 
-Traditional insider threat detection systems often depend on fixed behavioral patterns. However, attackers can **adapt their behavior when they realize they are being monitored**.
+Traditional insider threat detection often relies on fixed behavioral patterns, but attackers can **change their tactics to avoid detection**.
 
-For example, when a system detects a large data exfiltration attempt, an attacker may switch to a slower and less noticeable approach.
+SentinelAI models the attacker-defender interaction as a **dynamic Stackelberg Game** using **RASRO (Risk-Adaptive Security Response Optimization)**. It uses historical interactions, attacker adaptation, and defense effectiveness to select appropriate security responses.
 
-SentinelAI addresses this problem by modeling the interaction between the **defender and the attacker as a dynamic game**. This allows the system to track changes in attacker behavior and evaluate how well the defense responds.
-
-The system uses **RASRO (Risk-Adaptive Security Response Optimization)** to evaluate the changing attacker state and determine an appropriate defensive response based on historical interactions and calculated game-theoretic metrics.
-
-> **A dynamic Stackelberg Game Engine combined with Explainable AI and post-quantum-secure audit logging for adaptive insider threat detection.**
+> **Adaptive insider threat detection using Game Theory, Explainable AI, and Post-Quantum Cryptography.**
 
 ---
 
@@ -47,59 +43,31 @@ The system uses **RASRO (Risk-Adaptive Security Response Optimization)** to eval
 
 ### 1. 🎮 Dynamic Stackelberg Game Engine — RASRO
 
-SentinelAI uses a **Risk-Adaptive Security Response Optimization (RASRO)** approach to model the interaction between an adaptive insider and the SOC.
+- Models the **SOC as the Leader** and the **Insider as the Follower** across multiple interactions.
+- Uses PostgreSQL history to track changing attacker behavior.
+- Calculates **AAS (Attacker Adaptation Score)** and **RES (Response Effectiveness Score)**.
+- Supports adaptive mitigation actions such as `REVOKE_SESSION` and `RESTRICT_ACCESS`.
 
-- **Multi-Turn Interactions:** Models cybersecurity as a dynamic game where the SOC (Leader) and Insider (Follower) respond to each other's actions over multiple turns.
-- **Adaptive Response:** The defense response changes based on the current threat state and previous attacker behavior.
-- **Stateful Evaluation:** Uses historical interaction data stored in PostgreSQL instead of treating every event as an isolated incident.
-- **Attacker Adaptation Score (AAS):** Measures how much the attacker's strategy changes between interactions.
-- **Response Effectiveness Score (RES):** Measures how effectively the previous defensive action handled the current threat.
-- **Mitigation Decisions:** Uses the evaluated state to support actions such as `REVOKE_SESSION`, `RESTRICT_ACCESS`, and other security responses.
+### 2. 🤖 Explainable AI (XAI)
 
-### 2. 🤖 Explainable AI (XAI) Pipeline
-
-SentinelAI combines machine learning with explainability to identify unusual user behavior and understand why an event was flagged.
-
-- **Multivariate Anomaly Detection:** Uses **Isolation Forest** and **One-Class SVM** to analyze behavioral signals such as data transferred, login hours, and sensitive file access.
-- **Tree SHAP Attribution:** Shows which behavioral features contributed most to the anomaly score.
-- **Analyst-Friendly Results:** Provides interpretable feature contributions instead of only returning a binary anomaly decision.
+- Uses **Isolation Forest** and **One-Class SVM** to detect unusual user behavior.
+- Analyzes signals such as data transfer, login times, and sensitive file access.
+- Uses **Tree SHAP** to show which features contributed to an anomaly decision.
 
 ### 3. 🔐 Post-Quantum Cryptography (PQC)
 
-SentinelAI includes a post-quantum cryptography layer to protect sensitive security decisions and audit records.
+- **ML-KEM:** Used for post-quantum secure key establishment.
+- **ML-DSA:** Used for digital signatures on security decisions and audit records.
+- Protects the integrity and authenticity of important security events.
 
-#### 🔑 ML-KEM — Key Encapsulation
-
-**ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism)** is used for post-quantum secure key establishment.
-
-It provides a way for the system to establish shared cryptographic keys while being designed to remain secure against attacks from future quantum computers.
-
-#### ✍️ ML-DSA — Digital Signatures
-
-**ML-DSA (Module-Lattice-Based Digital Signature Algorithm)** is used to digitally sign important security decisions and audit records.
-
-The system can cryptographically sign:
-
-- Telemetry evaluation results
-- Orchestrator decisions
-- Incident records
-- Mitigation actions
-- Audit events
-
-This helps provide **integrity, authenticity, and tamper detection** for security records.
-
-#### 🛡️ PQC-Protected Audit Trail
-
-The combination of **ML-KEM and ML-DSA** provides the cryptographic layer used to protect sensitive communication and security records.
-
-> **ML-KEM → Secure Key Establishment → ML-DSA → Signed Security Decisions → PostgreSQL Audit Record**
+> **ML-KEM → Secure Key Establishment → ML-DSA → Signed Security Decision → PostgreSQL Audit Record**
 
 ### 4. 📈 Interactive Ablation Simulator
 
-- **Live React Dashboard:** Provides an interactive dashboard using Recharts to visualize telemetry and multi-cycle attack simulations.
-- **Scenario-Based Simulation:** Supports scenarios such as **Massive Exfiltration** and **Stealth Evasion**.
-- **Research Validation:** Compares static detection approaches with the adaptive game-theoretic approach through live graphs and metrics.
-- **Multi-Cycle Evaluation:** Allows attacker behavior and defensive responses to be observed across multiple interaction turns.
+- React dashboard for multi-cycle attack simulations.
+- Supports scenarios such as **Massive Exfiltration** and **Stealth Evasion**.
+- Visualizes **AAS, RES, attacker adaptation, and defense response**.
+- Compares static detection with the adaptive game-theoretic approach.
 
 ---
 
@@ -110,7 +78,7 @@ The combination of **ML-KEM and ML-DSA** provides the cryptographic layer used t
 > Role-based login system that protects access to the SOC dashboard and backend resources.
 
 <!-- 📸 LOGIN SCREENSHOT -->
-![Secure Login](./screenshots/login-page.png)
+![Secure Login](./images/login-page.png)
 
 ### 🖥️ Executive SOC Dashboard
 
