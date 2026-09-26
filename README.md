@@ -79,13 +79,6 @@ SentinelAI models the attacker-defender interaction as a **dynamic Stackelberg G
 <!-- 📸 SOC DASHBOARD SCREENSHOT -->
 ![Executive SOC Dashboard](./images/soc-dashboard.png)
 
-### 🔐 Cryptographic Audit Ledger
-
-> Displays the historical record of telemetry events, anomaly decisions, and Stackelberg mitigation actions.
-
-<!-- 📸 AUDIT SCREENSHOT -->
-![Audit Telemetry](./images/audit-telemetry.png)
-
 ### 🎯 Adaptive Attacker Simulator
 
 > Allows users to run multi-cycle attack simulations using custom telemetry or predefined scenarios such as **Massive Exfiltration** and **Stealth Evasion**.
@@ -106,6 +99,13 @@ SentinelAI models the attacker-defender interaction as a **dynamic Stackelberg G
 
 <!-- 📸 PQC TERMINAL SCREENSHOT -->
 ![ML-KEM and ML-DSA Terminal](./images/pqc-terminal.png)
+
+### 🔐 Cryptographic Audit Ledger
+
+> Displays the historical record of telemetry events, anomaly decisions, and Stackelberg mitigation actions.
+
+<!-- 📸 AUDIT SCREENSHOT -->
+![Audit Telemetry](./images/audit-telemetry.png)
 
 ### 🔄 End-to-End Decision & Enforcement Workflow
 
@@ -162,20 +162,6 @@ The PQC layer contains two main components:
 | :--- | :---: | :--- | :--- |
 | **AAS** | `-1.0` to `1.0` | **Attacker Adaptation Score:** Measures how much the attacker's strategy changes. | Helps identify strategy changes such as **Aggressive → Stealth** behavior. |
 | **RES** | `-1.0` to `1.0` | **Response Effectiveness:** Measures how well the SOC's previous action handled the current threat. | Helps determine whether actions such as **Revoke** or **Restrict** were effective. |
-
----
-
-## 🔄 System Workflow
-
-1. **📥 Telemetry Ingestion:** The React simulator sends behavioral telemetry to the FastAPI backend.
-2. **🤖 XAI Inference:** The data is processed by the Isolation Forest and One-Class SVM models. Tree SHAP calculates the contribution of each feature.
-3. **🎮 Stateful Game Evaluation:** The RASRO Stackelberg engine retrieves previous interaction data from PostgreSQL and evaluates the current attacker state.
-4. **📊 AAS & RES Calculation:** The system calculates the **Attacker Adaptation Score (AAS)** and **Response Effectiveness (RES)** using the current and previous interaction states.
-5. **🛡️ Mitigation Decision:** Based on the evaluated threat state, the orchestrator selects an appropriate security response such as `REVOKE_SESSION` or `RESTRICT_ACCESS`.
-6. **🔑 PQC Key Protection:** ML-KEM is used as part of the post-quantum key establishment layer.
-7. **✍️ Decision Signing:** The final mitigation decision and relevant audit information are digitally signed using **ML-DSA**.
-8. **💾 Database Commit:** The signed record is stored in PostgreSQL as part of the audit trail.
-9. **⚡ Enforcement & Visualization:** The selected security action is enforced and the frontend immediately updates the dashboard, metrics, and graphs.
 
 ---
 
