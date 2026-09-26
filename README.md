@@ -5,7 +5,7 @@ An end-to-end **cybersecurity research framework and data pipeline** designed to
 Unlike traditional anomaly detection systems that rely on fixed behavioral patterns, SentinelAI models how attackers can change their behavior to avoid detection. It combines **Game Theory, Explainable AI (XAI), and Post-Quantum Cryptography (PQC)** to create an adaptive and secure threat detection environment.
 
 <!-- 📸 HERO SCREENSHOT PLACEHOLDER -->
-![SentinelAI Main Dashboard](./screenshots/hero-dashboard.png)
+![SentinelAI Main Dashboard](./images/hero-dashboard.png)
 
 *(Replace this with a wide screenshot of the main Executive SOC Dashboard showing the SHAP chart and key metrics.)*
 
@@ -117,49 +117,49 @@ The combination of **ML-KEM and ML-DSA** provides the cryptographic layer used t
 > Displays incoming telemetry, active security incidents, anomaly scores, and Tree SHAP feature attribution.
 
 <!-- 📸 SOC DASHBOARD SCREENSHOT -->
-![Executive SOC Dashboard](./screenshots/soc-dashboard.png)
+![Executive SOC Dashboard](./images/soc-dashboard.png)
 
 ### 🔐 Cryptographic Audit Ledger
 
 > Displays the historical record of telemetry events, anomaly decisions, and Stackelberg mitigation actions.
 
 <!-- 📸 AUDIT SCREENSHOT -->
-![Audit Telemetry](./screenshots/audit-telemetry.png)
+![Audit Telemetry](./images/audit-telemetry.png)
 
 ### 🎯 Adaptive Attacker Simulator
 
 > Allows users to run multi-cycle attack simulations using custom telemetry or predefined scenarios such as **Massive Exfiltration** and **Stealth Evasion**.
 
 <!-- 📸 SIMULATOR SCREENSHOT -->
-![Threat Simulator Input](./screenshots/threat-simulator.png)
+![Threat Simulator Input](./images/threat-simulator.png)
 
 ### 📈 Research Ablation Study & Time-Series Graphs
 
 > Displays how the **Attacker Adaptation Score (AAS)** and **Response Effectiveness (RES)** change across multiple attack turns.
 
 <!-- 📸 GRAPHS SCREENSHOT -->
-![Ablation Study Graphs](./screenshots/ablation-graphs.png)
+![Ablation Study Graphs](./images/ablation-graphs.png)
 
 ### 🔑 ML-KEM & ML-DSA Post-Quantum Cryptography
 
 > Terminal demonstration showing the ML-KEM key encapsulation process and ML-DSA digital signature generation and verification.
 
 <!-- 📸 PQC TERMINAL SCREENSHOT -->
-![ML-KEM and ML-DSA Terminal](./screenshots/pqc-terminal.png)
+![ML-KEM and ML-DSA Terminal](./images/pqc-terminal.png)
 
 ### 🔄 End-to-End Decision & Enforcement Workflow
 
 > End-to-end flow showing how telemetry moves through anomaly detection, XAI analysis, RASRO evaluation, mitigation decision, cryptographic protection, and enforcement.
 
 <!-- 📸 END-TO-END WORKFLOW FLOWCHART -->
-![End-to-End Decision and Enforcement Workflow](./screenshots/end-to-end-workflow.png)
+![End-to-End Decision and Enforcement Workflow](./images/end-to-end-workflow.png)
 
 ### 🏗️ System Architecture
 
 > High-level architecture showing the interaction between the frontend, backend services, machine learning pipeline, RASRO engine, PostgreSQL database, and post-quantum cryptography layer.
 
 <!-- 📸 ARCHITECTURE IMAGE -->
-![SentinelAI System Architecture](./screenshots/architecture.png)
+![SentinelAI System Architecture](./images/architecture.png)
 
 ---
 
